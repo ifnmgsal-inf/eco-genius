@@ -1,0 +1,27 @@
+{% load crispy_forms_tags %}
+<div class="container">
+    <div class="card card-primary">
+        <div class="card-header text-center">
+            <div class="row">
+                <h3 class="card-title mx-auto w-100">Tabela de vida</h3>
+            </div>
+        </div>
+        <!-- /.card-header -->
+        <!-- form start -->
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="card-body">
+                {{ form|crispy }}
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer">
+                <a type="button" class="btn btn-secondary" href="{% url 'list_life_table' %}">
+                    <i class="fas fa-arrow-left"></i> Voltar
+                </a>
+                <button type="submit" class="btn btn-primary" style="float:right">
+                    <i class="fas fa-arrow-right"></i> Enviar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

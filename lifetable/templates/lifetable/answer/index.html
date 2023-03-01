@@ -1,0 +1,156 @@
+{% extends 'system/dashboard_base.html' %}
+{% load static %}
+{% block extra_style %}
+    <link rel="stylesheet" type="text/css" href="{% static 'data_tables/datatables.min.css' %}"/>
+{% endblock %}
+
+{% block title %}Respostas | Eco Genius{% endblock %}
+{% block titlebody %}Respostas{% endblock %}
+{% block breadcrumb %}
+    <li class="breadcrumb-item active">Respostas</li>
+{% endblock %}
+
+{% block content %}
+    <div>
+        <div class="card">
+            <div class="card-header text-center">
+                <h3 class="card-title mx-auto w-100">Respostas</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive">
+                <table id="table_list_objects" class="table table-bordered table-striped">
+                    <thead>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                        <th>Assertividade(%)</th>
+                        <th>
+                            {% if request.user.is_student %}
+                                Data resposta
+                            {% else %}
+                                Repostas
+                            {% endif %}
+                        </th>
+                        <th style="width: 152px">Ações</th>
+
+                    </thead>
+                    <tbody>
+                        {% for object in object_list %}
+                            <tr>
+                                <td>{{ object.pk }}</td>
+                                <td>{{ object.name }}</td>
+                                <td>{{ object.description }}</td>
+                                <td>{{ object.corrects }}</td>
+                                <td>
+                                    {% if request.user.is_student %}
+                                        {{ object.date_response }}
+                                    {% else %}
+                                        {{ object.quantity }}
+                                    {% endif %}
+                                </td>
+                                <td class="text-center">
+                                    <a class="btn btn-sm btn-info"
+                                       href="{% if not request.user.is_student %}
+                                                {% url 'list_answer_student' object.pk %}
+                                            {% else %}
+                                                {% url 'view_answer' object.pk %}
+                                            {% endif %}"
+                                    >
+                                        <i class="fas fa-eye"></i>
+                                        Visualizar
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+
+    {% if request.user.is_student %}
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0">Responder</h1>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+
+        <div>
+            <div class="card">
+                <div class="card-header text-center">
+                    <h3 class="card-title mx-auto w-100">Tabelas de vida</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body table-responsive">
+                    <table id="table_list_objects2" class="table table-bordered table-striped">
+                        <thead>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Descrição</th>
+                            <th style="width: 152px">Ações</th>
+
+                        </thead>
+                        <tbody>
+                            {% for object in tables %}
+                                <tr>
+                                    <td>{{ object.pk }}</td>
+                                    <td>{{ object.name }}</td>
+                                    <td>{{ object.description }}</td>
+                                    <td class="text-center">
+                                        <a class="btn btn-sm btn-primary" href="{% url 'create_answer' object.pk %}">
+                                            <i class="fas fa-edit"></i>
+                                            Responder
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript" src="{% static 'data_tables/datatables.min.js' %}"></script>
+    <script type="text/javascript">
+        $(() => {
+            $("#table_list_objects").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "paging": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "language": {
+                    "url": "{% static 'data_tables/datatables_pt_br.js' %}"
+                }
+            });
+
+            $("#table_list_objects2").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "paging": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "language": {
+                    "url": "{% static 'data_tables/datatables_pt_br.js' %}"
+                }
+            });
+        });
+    </script>
+{% endblock %}

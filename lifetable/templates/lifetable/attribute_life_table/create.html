@@ -1,0 +1,12 @@
+{% extends 'system/dashboard_base.html' %}
+
+{% block title %}Cadastrar Atributo | Eco Genius{% endblock %}
+{% block titlebody %}Cadastrar Atributo de tabelas{% endblock %}
+{% block breadcrumb %}
+    <li class="breadcrumb-item"><a href="{% url 'list_attributes' %}">Atributos</a></li>
+    <li class="breadcrumb-item active">Cadastrar</li>
+{% endblock %}
+
+{% block content %}
+    {% include 'lifetable/attribute_life_table/form.html' %}
+{% endblock %}

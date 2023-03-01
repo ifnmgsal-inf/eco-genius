@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+{% load static %}
+{% load crispy_forms_tags %}
+<html lang="pt-br">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}Eco Genius | Cadastrar{% endblock %}</title>
+
+        <!-- Google Font: Source Sans Pro -->
+        <link rel="stylesheet"
+              href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="{% static 'adminLTE/plugins/fontawesome-free/css/all.min.css' %}">
+        <!-- icheck bootstrap -->
+        <link rel="stylesheet" href="{% static 'adminLTE/plugins/icheck-bootstrap/icheck-bootstrap.min.css' %}">
+        <!-- Theme style -->
+        <link rel="stylesheet" href="{% static 'adminLTE/dist/css/adminlte.min.css' %}">
+
+        <!-- Favicon -->
+        <link rel="icon" href="{% static 'images/fav_icon_32x32.png' %}"/>
+        <link href="{% static 'images/fav_icon_32x32.png' %}" type="image/png" rel="shortcut icon">
+
+        <!-- Favicon -->
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    </head>
+    <body class="hold-transition register-page">
+        <div class="register-box">
+            <div class="card card-outline card-primary">
+                <div class="card-header text-center">
+                    <a href="{% url 'ecogenius' %}" class="h1">Eco Genius</a>
+                </div>
+                <div class="card-body">
+                    <p class="login-box-msg">Cadastrar novo usuário</p>
+
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <div class="row">
+                            <!-- /.col -->
+                            <div class="col-4">
+                                <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                    </form>
+
+                    <a href="{% url 'login' %}" class="text-center">Login</a>
+                </div>
+                <!-- /.form-box -->
+            </div><!-- /.card -->
+        </div>
+        <!-- /.register-box -->
+
+        <!-- jQuery -->
+        <script src="{% static 'adminLTE/plugins/jquery/jquery.min.js' %}"></script>
+        <!-- Bootstrap 4 -->
+        <script src="{% static 'adminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+        <!-- AdminLTE App -->
+        <script src="{% static 'adminLTE/dist/js/adminlte.min.js' %}"></script>
+    </body>
+</html>

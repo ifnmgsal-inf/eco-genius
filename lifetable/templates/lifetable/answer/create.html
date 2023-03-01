@@ -1,0 +1,12 @@
+{% extends 'system/dashboard_base.html' %}
+
+{% block title %}Cadastrar Resposta | Eco Genius{% endblock %}
+{% block titlebody %}Cadastrar Resposta{% endblock %}
+{% block breadcrumb %}
+    <li class="breadcrumb-item"><a href="{% url 'list_answer' %}">Respostas</a></li>
+    <li class="breadcrumb-item active">Cadastrar</li>
+{% endblock %}
+
+{% block content %}
+    {% include 'lifetable/answer/form.html' %}
+{% endblock %}

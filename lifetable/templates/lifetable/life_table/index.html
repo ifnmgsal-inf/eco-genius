@@ -1,0 +1,79 @@
+{% extends 'system/dashboard_base.html' %}
+{% load static %}
+{% block extra_style %}
+    <link rel="stylesheet" type="text/css" href="{% static 'data_tables/datatables.min.css' %}"/>
+{% endblock %}
+
+{% block title %}Tabelas de Vida | Eco Genius{% endblock %}
+{% block titlebody %}Tabelas de vida{% endblock %}
+{% block breadcrumb %}
+    <li class="breadcrumb-item active">Tabelas de vida</li>
+{% endblock %}
+
+{% block content %}
+    <div>
+        <div class="card">
+            <div class="card-header text-center">
+                <h3 class="card-title">Tabelas de vida</h3>
+                <a href="{% url 'create_life_table' %}" class="btn btn-primary btn-sm" style="float:right">
+                    <i class="fas fa-plus"></i>
+                    Nova Tabela
+                </a>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive">
+                <table id="table_list_objects" class="table table-bordered table-striped">
+                    <thead>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                        <th style="width: 152px">Ações</th>
+
+                    </thead>
+                    <tbody>
+                        {% for object in object_list %}
+                            <tr>
+                                <td>{{ object.pk }}</td>
+                                <td>{{ object.name }}</td>
+                                <td>{{ object.description }}</td>
+                                <td class="text-center">
+                                    <a class="btn btn-sm btn-primary" href="{% url 'update_life_table' object.pk %}">
+                                        <i class="fas fa-edit"></i>
+                                        Editar
+                                    </a>
+                                    &nbsp
+                                    <a class="btn btn-sm btn-danger" href="{% url 'delete_life_table' object.pk %}">
+                                        <i class="fas fa-trash"></i>
+                                        Remover
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript" src="{% static 'data_tables/datatables.min.js' %}"></script>
+    <script type="text/javascript">
+        $(() => {
+            $("#table_list_objects").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "paging": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "language": {
+                    "url": "{% static 'data_tables/datatables_pt_br.js' %}"
+                }
+            }).buttons().container().appendTo('#table_list_objects_wrapper .col-md-6:eq(0)');
+        });
+    </script>
+{% endblock %}

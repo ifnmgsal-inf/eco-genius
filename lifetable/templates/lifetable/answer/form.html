@@ -1,0 +1,50 @@
+{% load crispy_forms_tags %}
+<div>
+    <div class="card card-primary">
+        <div class="card-header text-center">
+            <div class="row">
+                <h3 class="card-title mx-auto w-100">Resposta</h3>
+            </div>
+        </div>
+        <!-- /.card-header -->
+        <!-- form start -->
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="card-body table-responsive">
+                <table id="table_list_objects" class="table table-bordered table-striped">
+                    <thead class="table-bordered">
+                        {% for column in columns %}
+                            <th>{{ column }}</th>
+                        {% endfor %}
+                    </thead>
+                    <tbody>
+                        {% for line in lines %}
+                            <tr>
+                                {% for cell in line %}
+                                    <td>
+                                        {% if cell.value %}
+                                            {{ cell.value }}
+                                        {% else %}
+                                            <input name="{{ cell.pk }}" style="border:1px solid #000;" type="text"
+                                                   value="{{ cell.form.data.value}}" required
+                                            >
+                                        {% endif %}
+                                    </td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer">
+                <a type="button" class="btn btn-secondary" href="{% url 'list_answer' %}">
+                    <i class="fas fa-arrow-left"></i> Voltar
+                </a>
+                <button type="submit" class="btn btn-primary" style="float:right">
+                    <i class="fas fa-arrow-right"></i> Enviar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

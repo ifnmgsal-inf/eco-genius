@@ -1,0 +1,81 @@
+{% extends 'system/dashboard_base.html' %}
+{% load static %}
+{% block extra_style %}
+    <link rel="stylesheet" type="text/css" href="{% static 'data_tables/datatables.min.css' %}"/>
+{% endblock %}
+
+{% block title %}Respostas Alunos | Eco Genius{% endblock %}
+{% block titlebody %}Respostas Tabela {{ table_pk }}{% endblock %}
+{% block breadcrumb %}
+    <li class="breadcrumb-item"><a href="{% url 'list_answer' %}">Respostas</a></li>
+    <li class="breadcrumb-item active">Tabela - {{ table_pk }}</li>
+{% endblock %}
+
+{% block content %}
+    <div>
+        <div class="card">
+            <div class="card-header text-center">
+                <h3 class="card-title mx-auto w-100">Respostas</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive">
+                <table id="table_list_objects" class="table table-bordered table-striped">
+                    <thead>
+                        <th>ID</th>
+                        <th>Aluno</th>
+                        <th>Assertividade(%)</th>
+                        <th>Data resposta</th>
+                        <th style="width: 172px">Ações</th>
+                    </thead>
+                    <tbody>
+                        {% for object in object_list %}
+                            <tr>
+                                <td>{{ object.pk }}</td>
+                                <td>{{ object.first_name }} {{ object.last_name }}</td>
+                                <td>{{ object.corrects }}</td>
+                                <td>{{ object.date_response }}</td>
+                                <td class="text-center">
+                                    <a class="btn btn-sm btn-info"
+                                       href="{% url 'view_answer_student' table_pk object.pk %}"
+                                    >
+                                        <i class="fas fa-eye"></i>
+                                        Visualizar
+                                    </a>
+                                    &nbsp
+                                    <a class="btn btn-sm btn-danger"
+                                       href="{% url 'delete_answer_student' table_pk object.pk %}"
+                                    >
+                                        <i class="fas fa-trash"></i>
+                                        Remover
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript" src="{% static 'data_tables/datatables.min.js' %}"></script>
+    <script type="text/javascript">
+        $(() => {
+            $("#table_list_objects").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "paging": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "language": {
+                    "url": "{% static 'data_tables/datatables_pt_br.js' %}"
+                }
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'system/dashboard_base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Apagar Resposta | Eco Genius{% endblock %}
+{% block titlebody %}Apagar Resposta{% endblock %}
+{% block breadcrumb %}
+    <li class="breadcrumb-item"><a href="{% url 'list_life_table' %}">Resposta</a></li>
+    <li class="breadcrumb-item">
+        <a href="{% url 'list_answer_student' table_pk %}">Tabela - {{ table_pk }}</a>
+    </li>
+    <li class="breadcrumb-item active">Apagar - {{ student_pk }}</li>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="card card-danger">
+            <div class="card-header text-center">
+                <div class="row">
+                    <h3 class="card-title mx-auto w-100">Resposta</h3>
+                </div>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="card-body">
+                    <p>
+                        <b>ATENÇÃO</b>:
+                        Todas as respostas de {{ student_name }} nessa tabela serão apagadas
+                    </p>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    <a type="button" class="btn btn-secondary" href="{% url 'list_answer_student' table_pk %}">
+                        <i class="fas fa-arrow-left"></i> Voltar
+                    </a>
+                    <button type="submit" class="btn btn-danger" style="float:right">
+                        <i class="fas fa-trash"></i> Apagar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

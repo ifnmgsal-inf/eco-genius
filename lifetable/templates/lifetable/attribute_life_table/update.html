@@ -1,0 +1,12 @@
+{% extends 'system/dashboard_base.html' %}
+
+{% block title %}Atualizar Atributo | Eco Genius{% endblock %}
+{% block titlebody %}Atualizar Atributo de tabelas{% endblock %}
+{% block breadcrumb %}
+    <li class="breadcrumb-item"><a href="{% url 'list_attributes' %}">Atributos</a></li>
+    <li class="breadcrumb-item active">Atualizar - {{ object.pk }}</li>
+{% endblock %}
+
+{% block content %}
+    {% include 'lifetable/attribute_life_table/form.html' %}
+{% endblock %}

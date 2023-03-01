@@ -1,0 +1,12 @@
+{% extends 'system/dashboard_base.html' %}
+
+{% block title %}Cadastrar Tabela de Vida | Eco Genius{% endblock %}
+{% block titlebody %}Cadastrar Tabela de vida{% endblock %}
+{% block breadcrumb %}
+    <li class="breadcrumb-item"><a href="{% url 'list_life_table' %}">Tabelas de vida</a></li>
+    <li class="breadcrumb-item active">Cadastrar</li>
+{% endblock %}
+
+{% block content %}
+    {% include 'lifetable/life_table/form.html' %}
+{% endblock %}

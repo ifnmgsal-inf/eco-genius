@@ -1,0 +1,12 @@
+{% extends 'system/dashboard_base.html' %}
+
+{% block title %}Cadastrar Professor | Eco Genius{% endblock %}
+{% block titlebody %}Cadastrar Professor{% endblock %}
+{% block breadcrumb %}
+    <li class="breadcrumb-item"><a href="{% url 'list_teachers' %}">Professores</a></li>
+    <li class="breadcrumb-item active">Cadastrar</li>
+{% endblock %}
+
+{% block content %}
+    {% include 'lifetable/teacher/form.html' %}
+{% endblock %}

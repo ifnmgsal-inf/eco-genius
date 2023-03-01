@@ -1,0 +1,12 @@
+{% extends 'system/dashboard_base.html' %}
+
+{% block title %}Atualizar Tabela de vida | Eco Genius{% endblock %}
+{% block titlebody %}Atualizar Tabela de vida{% endblock %}
+{% block breadcrumb %}
+    <li class="breadcrumb-item"><a href="{% url 'list_life_table' %}">Tabelas de vida</a></li>
+    <li class="breadcrumb-item active">Atualizar - {{ object.pk }}</li>
+{% endblock %}
+
+{% block content %}
+    {% include 'lifetable/life_table/form.html' %}
+{% endblock %}
