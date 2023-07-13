@@ -4,3 +4,5 @@
 */migrations/*
 /explanations/
 /media/
+*/__pycache__/*
+*/*/__pycache__/*
