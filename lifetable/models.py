@@ -93,9 +93,6 @@ class LifeTable(EcoGeniusModel):
         },
     )
 
-    def clean(self):
-        raise ValidationError('Olá mundo')
-
     def delete(self, using=None, keep_parents=False):
         cells = Cell.objects.filter(table=self)
         columns_id = cells.values_list('column', flat=True).distinct()
